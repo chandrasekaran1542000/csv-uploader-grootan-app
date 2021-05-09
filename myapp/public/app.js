@@ -6,14 +6,12 @@ const updateBtn = document.getElementById("updateBtn");
 readFile = () => {
     let reader = new FileReader();
     reader.onload = () => {
-        console.log(reader);
         const info =  parseCSV(reader.result);
         const users = [];
         for(let i=1;i<info.length;i++){
             let user = {};
             for(let j=0;j<info[i].length;j++){
                 if(info[0][j].toLowerCase()=="password"){
-                    console.table(info[0][j],info[i][j]);
                     user[info[0][j]] = encrypt(info[i][j]);
                 }
                 else user[info[0][j]] = info[i][j];
@@ -52,6 +50,5 @@ function parseCSV(str) {
 
 function encrypt(password){
     var encrypted = CryptoJS. AES. encrypt(password, 'secret key 123'). toString();
-    console.log(encrypted);
     return encrypted;
 }
